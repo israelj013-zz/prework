@@ -1,68 +1,40 @@
-# Xcode
-#
-# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+//
+//  ViewController.swift
+//  tippy
+//
+//  Created by israelj on 1/7/19.
+//  Copyright © 2019 labuser. All rights reserved.
+//
 
-## Build generated
-build/
-DerivedData/
+import UIKit
 
-## Various settings
-*.pbxuser
-!default.pbxuser
-*.mode1v3
-!default.mode1v3
-*.mode2v3
-!default.mode2v3
-*.perspectivev3
-!default.perspectivev3
-xcuserdata/
+class ViewController: UIViewController {
 
-## Other
-*.moved-aside
-*.xccheckout
-*.xcscmblueprint
+    @IBOutlet weak var tipLabel: UILabel!
+    @IBOutlet weak var totalLabel: UILabel!
+    @IBOutlet weak var billField: UITextField!
+    @IBOutlet weak var tipControl: UISegmentedControl!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+    }
 
-## Obj-C/Swift specific
-*.hmap
-*.ipa
-*.dSYM.zip
-*.dSYM
 
-## Playgrounds
-timeline.xctimeline
-playground.xcworkspace
+    @IBAction func OnTap(_ sender: Any) {
+        view.endEditing(true)
+        
+    }
+    @IBAction func calculateTip(_ sender: Any) {
+        let tipPercentage = [0.18,0.2,0.25]
+        let bill = Double(billField.text!) ?? 0
+        let tip = bill * tipPercentage[tipControl.selectedSegmentIndex]
+        let total = bill + tip
+        
+        
+        tipLabel.text = String(format: "$%.2f", tip)
+        totalLabel.text = String(format: "$%.2f", total)
+        
+    }
+}
 
-# Swift Package Manager
-#
-# Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
-# Packages/
-# Package.pins
-# Package.resolved
-.build/
-
-# CocoaPods
-#
-# We recommend against adding the Pods directory to your .gitignore. However
-# you should judge for yourself, the pros and cons are mentioned at:
-# https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
-#
-# Pods/
-
-# Carthage
-#
-# Add this line if you want to avoid checking in source code from Carthage dependencies.
-# Carthage/Checkouts
-
-Carthage/Build
-
-# fastlane
-#
-# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
-# screenshots whenever they are needed.
-# For more information about the recommended setup visit:
-# https://docs.fastlane.tools/best-practices/source-control/#source-control
-
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots/**/*.png
-fastlane/test_output
